@@ -1,4 +1,4 @@
-package com.ws.gitlab.gitlabci;
+package com.ws.gitlab.local;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
