@@ -1,0 +1,33 @@
+spring:
+
+  application:
+    name: gitlab-local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gitlab-local
+    username: compose_user
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    open-in-view: false
+    defer-datasource-initialization: true
+
+  docker:
+    compose:
+      enabled: false
+      lifecycle-management: start_and_stop
+      start:
+        command: up
+        skip: if_running
+      stop:
+        command: down
+
+server:
+  port: 8089
+  servlet:
+    context-path: /
