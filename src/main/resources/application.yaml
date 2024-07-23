@@ -19,7 +19,7 @@ spring:
 
   docker:
     compose:
-      enabled: false
+      enabled: true
       lifecycle-management: start_and_stop
       start:
         command: up
