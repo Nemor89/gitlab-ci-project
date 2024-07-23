@@ -1,4 +1,4 @@
-image: bellsoft/liberica-openjdk-alpine:latest
+image: maven:latest
 
 build:
   stage: build
