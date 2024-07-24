@@ -6,11 +6,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.ws.gitlab</groupId>
     <artifactId>gitlab-local</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>gitlab-local</name>
     <url/>
     <licenses>
@@ -55,11 +55,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -73,20 +68,12 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <distributionManagement>
         <repository>
             <id>maven-local</id>
-<!--            Для работы из контейнера-->
-            <url>http://host.docker.internal:8081/repository/maven-local/</url>
-<!--            Для локальной работы-->
-<!--            <url>http://localhost:8081/repository/maven-local/</url>-->
+            <url>${env.NEXUS_REPO_URL}/repository/maven-local/</url>
         </repository>
     </distributionManagement>
 
@@ -137,10 +124,7 @@
                 </executions>
                 <configuration>
                     <serverId>maven-local</serverId>
-<!--                    Для работы из контейнера-->
-                    <nexusUrl>http://host.docker.internal:8081/nexus/</nexusUrl>
-<!--                    Для локальной работы-->
-<!--                    <nexusUrl>http://localhost:8081/nexus/</nexusUrl>-->
+                    <nexusUrl>${env.NEXUS_REPO_URL}/nexus/</nexusUrl>
                     <skipStaging>true</skipStaging>
                 </configuration>
             </plugin>
