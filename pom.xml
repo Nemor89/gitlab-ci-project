@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.ws.gitlab</groupId>
     <artifactId>gitlab-local</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>gitlab-local</name>
     <url/>
     <licenses>
@@ -55,11 +55,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-testcontainers</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
@@ -85,6 +80,16 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>maven-local</id>
+<!--            Для работы из контейнера-->
+            <url>http://host.docker.internal:8081/repository/maven-local/</url>
+<!--            Для локальной работы-->
+<!--            <url>http://localhost:8081/repository/maven-local/</url>-->
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -105,6 +110,38 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <argLine>-XX:+EnableDynamicAgentLoading</argLine>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy-plugin.version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.7.0</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>maven-local</serverId>
+<!--                    Для работы из контейнера-->
+                    <nexusUrl>http://host.docker.internal:8081/nexus/</nexusUrl>
+<!--                    Для локальной работы-->
+<!--                    <nexusUrl>http://localhost:8081/nexus/</nexusUrl>-->
+                    <skipStaging>true</skipStaging>
                 </configuration>
             </plugin>
         </plugins>
