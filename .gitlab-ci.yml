@@ -23,4 +23,4 @@ deploy:
   script:
     - mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true
   only:
-    - master
+    - main
