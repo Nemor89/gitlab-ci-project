@@ -1,5 +1,13 @@
 image: maven:3.9.8-eclipse-temurin-22-alpine
 
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
+
+stages:
+  - build
+  - test
+  - deploy
+
 build:
   stage: build
   script:
@@ -8,9 +16,11 @@ build:
 test:
   stage: test
   script:
-    - mvn clean test
+    - mvn $MAVEN_CLI_OPTS test
 
 deploy:
   stage: deploy
   script:
-    - mvn clean deploy -Dmaven.test.skip=true
+    - mvn $MAVEN_CLI_OPTS deploy -Dmaven.test.skip=true
+  only:
+    - master
