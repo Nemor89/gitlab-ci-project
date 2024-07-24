@@ -19,7 +19,7 @@ public class CiTest {
     UserRepository userRepo;
 
     @Test
-    public void test() {
+    public void getUsers() {
         when(userRepo.findAll()).thenReturn(List.of(new User()));
 
         List<User> users = userRepo.findAll();

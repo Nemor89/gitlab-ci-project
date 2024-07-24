@@ -1,6 +1,5 @@
 package com.ws.gitlab.local.controller;
 
-import com.ws.gitlab.local.TestService;
 import com.ws.gitlab.local.entity.User;
 import com.ws.gitlab.local.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
-    private final TestService testService;
 
     @GetMapping(value = "/get/all")
     public List<User> getAll() {
@@ -32,10 +30,5 @@ public class UserController {
     @GetMapping(value = "/get/constant/ivan")
     public User getIvan() {
         return userRepository.findByName("ivan").orElse(null);
-    }
-
-    @GetMapping(value = "/get/service/petr")
-    public User getPetr() {
-        return testService.getPetr();
     }
 }
