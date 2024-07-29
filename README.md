@@ -2,16 +2,16 @@
 
 1. Для проекта существует отдельный [репозиторий](https://github.com/Nemor89/gitlab-server), содержащий docker-compose файл с описание инфраструктуры (gitlab server, gitlab runner, nexus, elk).
 2. Credentials:
-   - Gitlab
+   - [Gitlab](http://localhost:8929/)
       - логин: admin
       - пароль: CHANGE_ME_123 (задается в .env)
-   - Nexus
+   - [Nexus](http://localhost:8081/)
       - логин: admin
       - пароль: При попытке аутентифицироваться будет указано, где посмотреть первоначальный пароль
-   - Kibana
+   - [Kibana](http://localhost:5601/)
       - логин: elastic
       - пароль: changeme
-3. После запуска проекта необходимо создать nexus repository http://localhost:8081/. Репозиторий необходимо назвать maven-local
+3. После запуска проекта необходимо создать nexus repository. Репозиторий необходимо назвать maven-local
 4. Необходимо зарегистрировать переменные среды для локальной машины и для gitlab ci
     - *NEXUS_REPO_URL* - url созданного в nexus репозитория
     - *NEXUS_REPO_USER* - login УЗ nexus (по умолчанию admin)
