@@ -35,3 +35,7 @@ server:
 logging:
   file:
     name: classpath:log4j2-spring.xml
+
+elk-stack:
+  host: ${ELK_HOST}
+  port: ${ELK_PORT}
